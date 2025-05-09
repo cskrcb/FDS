@@ -1,0 +1,85 @@
+def removeDuplicate(t):
+    l1 = []
+    for i in t:
+        if i not in l1:
+            l1.append(i)
+    return l1
+
+def intersection(lst1, lst2):
+    lst3 = []
+    for value in lst1:
+        if value in lst2:
+            lst3.append(value)
+    return lst3
+
+def union(lst1, lst2):
+    lst3 = lst1.copy()
+    for value in lst2:
+        if value not in lst3:
+            lst3.append(value)
+    return lst3
+
+def difference(lst1, lst2):
+    lst3 = []
+    for value in lst1:
+        if value not in lst2:
+            lst3.append(value)
+    return lst3
+
+def symmetricDiff(lst1, lst2):
+    d1 = difference(lst1, lst2)
+    d2 = difference(lst2, lst1)
+    return union(d1, d2)
+
+def nCnB(lst1, lst2, lst3):
+    lst4 = difference(lst1, union(lst2, lst3))
+    print(lst4)
+    return lst4, len(lst4)
+
+SeAIDS = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+Cricket = ["a", "c", "e", "f", "c", "a", "i", "j"]
+Badminton = ["c", "b", "e", "h", "b", "g"]
+Football = ["b", "d", "e", "j"]
+
+Cricket = removeDuplicate(Cricket)
+Badminton = removeDuplicate(Badminton)
+Football = removeDuplicate(Football)
+
+flag = 1
+while flag == 1:
+    print("/*************MENU**************/")
+    print("1. List of students who played both Cricket and Badminton")
+    print("2. List of students who play either Cricket or Badminton")
+    print("3. Number of students who play neither Cricket nor Badminton")
+    print("4. Exit")
+    print("\n")
+    
+    choice = int(input("Enter your choice: "))
+    
+    if choice == 1:
+        print("Cricket: ", Cricket)
+        print("Badminton: ", Badminton)
+        print("List of students who played both Cricket and Badminton: ", intersection(Cricket, Badminton))
+        print("\n")
+        
+    elif choice == 2:
+        print("Cricket: ", Cricket)
+        print("Badminton: ", Badminton)
+        print("List of students who play either Cricket or Badminton: ", symmetricDiff(Cricket, Badminton))
+        print("\n")
+        
+    elif choice == 3:
+        print("Class: ", SeAIDS)
+        print("Cricket: ", Cricket)
+        print("Badminton: ", Badminton)
+        l, cnt = nCnB(SeAIDS, Cricket, Badminton)
+        print("Number of students who play neither Cricket nor Badminton: ", cnt)
+        print("List of students who play neither Cricket nor Badminton: ", l)
+        print("\n")
+        
+    elif choice == 4:
+        print("Closed")
+        flag = 0
+        
+    else:
+        print("Wrong choice")
